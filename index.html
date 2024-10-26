@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ucapan Selamat Ulang Tahun</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            overflow: hidden;
+            animation: backgroundAnimate 5s infinite alternate;
+        }
+
+        @keyframes backgroundAnimate {
+            0% { background: linear-gradient(45deg, #ff9a9e, #fad0c4); }
+            100% { background: linear-gradient(45deg, #ffecd2, #fcb69f); }
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            animation: bounceIn 1s ease-in-out;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        h1 {
+            color: #ff4081;
+            font-size: 2em;
+            margin-bottom: 10px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        p {
+            color: #333;
+            font-size: 1.2em;
+            margin: 10px 0 20px;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        .button {
+            padding: 12px 25px;
+            font-size: 1em;
+            background-color: #ff4081;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.3s, background-color 0.3s;
+            animation: fadeIn 2s ease-in;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+            background-color: #ff79a5;
+        }
+
+        .sticker {
+            width: 120px;
+            margin: 20px auto;
+            cursor: pointer;
+            animation: rotate 2s infinite;
+        }
+
+        .fireworks {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background-image: url('https://img.icons8.com/emoji/96/fireworks-emoji.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0;
+            pointer-events: none;
+            animation: explode 1s forwards;
+        }
+
+        #gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #gallery img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin: 5px;
+            border-radius: 10px;
+        }
+
+        #guessResult {
+            font-weight: bold;
+            margin-top: 10px;
+            color: #ff4081;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0); }
+            50% { transform: rotate(15deg); }
+            100% { transform: rotate(0); }
+        }
+
+        @keyframes explode {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.5); }
+        }
+
+        video {
+            width: 100%;
+            border-radius: 10px;
+            display: none; /* Sembunyikan video secara default */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Halaman 1 -->
+        <div class="page active" id="page1">
+            <h1>🎉 Selamat Ulang Tahun! 🎉</h1>
+            <p>Hari ini adalah hari istimewa kamu! 🎂</p>
+            <img src="https://img.icons8.com/emoji/96/birthday-cake-emoji.png" alt="Kue Ulang Tahun" class="sticker" onclick="showFireworks()">
+            <div class="fireworks" id="fireworks"></div>
+            <button class="button" onclick="nextPage()">Selanjutnya 🎈</button>
+        </div>
+
+        <!-- Halaman 2 -->
+        <div class="page" id="page2">
+            <h1>🌟 Harapan Bahagia! 🌟</h1>
+            <p>Semoga harimu penuh dengan kebahagiaan dan tawa! 😄</p>
+            <img src="https://img.icons8.com/emoji/96/confetti-ball-emoji.png" alt="Konfeti" class="sticker">
+            <button class="button" onclick="nextPage()">Selanjutnya 🎁</button>
+        </div>
+
+        <!-- Halaman 3 - Galeri Foto Statis -->
+        <div class="page" id="page3">
+            <h1>📸 Bagikan Kenanganmu! 📸</h1>
+            <p>Berikut adalah beberapa foto yang kami pilih untukmu:</p>
+            <div id="gallery">
+                <img src="https://via.placeholder.com/100" alt="Foto 1">
+                <img src="https://via.placeholder.com/100" alt="Foto 2">
+                <img src="https://via.placeholder.com/100" alt="Foto 3">
+                <img src="https://via.placeholder.com/100" alt="Foto 4">
+                <img src="https://via.placeholder.com/100" alt="Foto 5">
+            </div>
+            <button class="button" onclick="nextPage()">Selanjutnya 🎈</button>
+        </div>
+
+        <!-- Halaman 4 - Lagu -->
+        <div class="page" id="page4">
+            <h1>🎶 Mari Putar Lagu Ulang Tahun 🎶</h1>
+            <p>Klik di bawah untuk memulai musik! 🎵</p>
+            <button class="button" onclick="playMusic()">Putar Musik 🎵</button>
+            <button class="button" onclick="nextPage()">Lanjut </button>
+        </div>
+
+        <!-- Halaman 5 - Ucapan dari Teman -->
+        <div class="page" id="page5">
+            <h1>💌 Ucapan dari Teman! 💌</h1>
+            <p>Teman-temanmu telah mengirimkan ucapan selamat:</p>
+            <ul>
+                <li>Selamat ulang tahun! Semoga semua impianmu tercapai! 🎉</li>
+                <li>Semoga hari ini membawa kebahagiaan! 🥳</li>
+                <li>Selamat ulang tahun! Nikmati setiap momennya! 🎂</li>
+            </ul>
+            <button class="button" onclick="nextPage()">Selanjutnya 🎈</button>
+        </div>
+
+        <!-- Halaman 6 - Permainan Kecil -->
+        <div class="page" id="page6">
+            <h1>🎲 Mari Bermain! 🎲</h1>
+            <p>Tebak angka antara 1 hingga 10:</p>
+            <input type="number" id="guessInput" min="1" max="10">
+            <button class="button" onclick="checkGuess()">Tebak! 🎉</button>
+            <p id="guessResult"></p>
+            <button class="button" onclick="nextPage()">Selanjutnya 🎈</button>
+            <button class="button" onclick="resetPage()">Mulai Ulang 🔄</button>
+            <video id="selfieVideo" autoplay playsinline></video> <!-- Video untuk selfie -->
+        </div>
+
+        <!-- Halaman Penutup -->
+        <div class="page" id="page7">
+            <h1>🎊 Terima Kasih! 🎊</h1>
+            <p>Terima kasih telah merayakan ulang tahun dengan kami! Kami berharap kamu memiliki hari yang luar biasa! 🎉</p>
+            <button class="button" onclick="resetPage()">Rayakan Lagi! 🎈</button>
+        </div>
+        
+    </div>
+
+    <!-- Menambahkan Audio -->
+    <audio id="birthdaySong">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        let currentPage = 1;
+
+        function nextPage() {
+            document.getElementById(`page${currentPage}`).classList.remove('active');
+            currentPage++;
+            if (currentPage > 7) { // Cek apakah sudah mencapai halaman penutup
+                currentPage = 7;
+            }
+            document.getElementById(`page${currentPage}`).classList.add('active');
+        }
+
+        function playMusic() {
+            const audio = document.getElementById('birthdaySong');
+            audio.play();
+        }
+
+        function showFireworks() {
+            const fireworks = document.getElementById('fireworks');
+            fireworks.style.opacity = 1;
+            setTimeout(() => {
+                fireworks.style.opacity = 0;
+            }, 1000);
+        }
+
+        function checkGuess() {
+            const randomNumber = Math.floor(Math.random() * 10) + 1;
+            const guess = parseInt(document.getElementById('guessInput').value);
+            const result = document.getElementById('guessResult');
+            if (guess === randomNumber) {
+                result.textContent = "Selamat! Tebakanmu benar! 🎉";
+            } else {
+                result.textContent = `Sayang sekali! Angka yang benar adalah ${randomNumber}.`;
+            }
+        }
+
+        function resetPage() {
+            currentPage = 1;
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('page1').classList.add('active');
+        }
+
+        // Fungsi untuk mengakses webcam
+        async function startSelfie() {
+            const video = document.getElementById('selfieVideo');
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+        }
+
+        // Mulai selfie saat halaman dimuat
+        window.onload = startSelfie;
+    </script>
+</body>
+</html>
